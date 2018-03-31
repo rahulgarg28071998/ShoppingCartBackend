@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\info
+{\keywords cursorLocation=1690, fitsPagesWidth=1}}\margl1008\margr1008\margt1008\vieww15820\viewh14440\viewkind1\viewscale124
+\deftab720
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 user prop:::::\
+1.user_id\
+2.name\
+3.email\
+4.password\
+5.address\
+6.cart           :one to One\
+7.role\
+8.contact\
+9.enabled\
+\
+\
+cart prop:::::\
+1.cart_Id\
+2.cartItemCount\
+3.grandTotal\
+4.user            :one To One\
+5.cartList:carItem:one To Many\
+\
+cartItem prop::::::\
+1.cartItem_Id\
+2.product   :one to one\
+3.cart      :many to one\
+4.sell_quantity\
+5.total_price\
+\
+product prop:::::\
+1.id\
+2.brand\
+3.activeIs\
+4.description\
+5.name\
+6.supplier\
+7.image_url\
+8.quantity\
+9.price\
+10.CartItem  :one to one\
+\
+mapping\
+user      : product :na\
+		  : cart    :oneToOne\
+		  :carItem	:na\
+		  \
+cart	  :user		:oneToOne\
+		  :cartItem	:oneToMany\
+		  :product  :na\
+		  \
+cartItem  :cart		:manyToOne\
+		  :user		:na\
+		  :product	:oneToOne\
+\
+product	  :user    :na\
+		  :cart    :na\
+		  :cartItem:oneToOne \
+\
+implementations \
+\
+user :boolean add(User user);\
+	  boolean update(User user);\
+	  boolean delete(String email);\
+	  public User getUserById(int user_id);\
+\
+cart:public boolean updateCart(Cart cart);\
+	public Cart getCartBycart_Id(int cart_Id);\
+	public boolean deleteAllCartItems(Cart cart);\
+\
+cartItem:	public boolean addCartItem(CartItem cartItem);\
+	public List<CartItem> cartItemGetByCart(Cart cart);\
+	public boolean updateCartItem(CartItem cartItem);\
+	public boolean deleteCartItem(int cartItem_Id);\
+	public CartItem getCartItemByCartItem_Id(int cartItem_Id);\
+	public CartItem getCartItemByUserIdAndProductId(Cart cart, Product product);\
+	public boolean searchCartItemByUserIdAndProductId(Cart cart, Product product);\
+	\
+product: public Product getProduct(int id);\
+		 public List <Product> productList();\
+		boolean add(Product product);\
+		boolean update(Product product);\
+		boolean delete(int id);\
+		boolean isActive(int id);\
+	  \
+\
+}
